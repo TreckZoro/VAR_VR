@@ -10,8 +10,8 @@ The player will dispose a menu that can spawn some objects and so more (to defin
 - [ ] Decide project idea
 - [ ] Create hands and movement of them that recreate the RL (real life) hands of the player
 - [ ] Do actions with hands like hand pressence
-- [ ] Implement Constant Movement
-- [ ] Implement Teleportation of the player
+- [x] Implement Constant Movement
+- [x] Implement Teleportation of the player
 - [ ] See how implement the option to switch between them
 - [ ] Search different models and put in the scene
 - [ ] Level design (where and how to put the different models)

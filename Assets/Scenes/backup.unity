@@ -154,6 +154,7 @@ Transform:
   - {fileID: 1579701635}
   - {fileID: 1995383363}
   - {fileID: 777446138}
+  - {fileID: 1024515756}
   m_Father: {fileID: 1377783310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &396349340 stripped
@@ -663,7 +664,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1347874260}
-  - {fileID: 1024515756}
   m_Father: {fileID: 396172626}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &777446139
@@ -1065,14 +1065,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024515755}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 778172496}
-  - {fileID: 1377833782}
-  m_Father: {fileID: 777446138}
+  m_Father: {fileID: 396172626}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &1024515757
 SortingGroup:
@@ -1101,7 +1100,7 @@ MonoBehaviour:
   m_LineWidth: 0.0145
   m_OverrideInteractorLineLength: 1
   m_LineLength: 10
-  m_AutoAdjustLineLength: 1
+  m_AutoAdjustLineLength: 0
   m_MinLineLength: 0.5
   m_UseDistanceToHitAsMaxLineLength: 1
   m_LineRetractionDelay: 0.5
@@ -1714,13 +1713,12 @@ MonoBehaviour:
       m_Name: Joystick
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: b4e7e9f7-d6dd-4a50-bfc2-801a1a7bc4c9
+      m_Id: 34974535-eee3-4f79-828c-7ccdd413906c
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -8270564778575511633, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  xRayInteractor: {fileID: 0}
+    m_Reference: {fileID: -7813013294023911475, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &1093667304
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,37 +2141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_System: {fileID: 1377783311}
   m_DelayTime: 0
---- !u!1 &1377833781
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1377833782}
-  m_Layer: 0
-  m_Name: OffsetRay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1377833782
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377833781}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1024515756}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1435823970
 GameObject:
   m_ObjectHideFlags: 0
