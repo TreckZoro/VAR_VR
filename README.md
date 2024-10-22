@@ -17,3 +17,4 @@ The player will dispose a menu that can spawn some objects and so more (to defin
 - [ ] Level design (where and how to put the different models)
 - [ ] Implement grab different object (distance, make smooth, difen wich button to grab...)
 - [ ] User Interface (which options implement)
+- [ ] Deactivate grab when teleport is active.
