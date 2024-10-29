@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TeleportActivatorç : MonoBehaviour
+public class TeleportActivator : MonoBehaviour
 {
     public GameObject teleportationRay;
     public InputActionProperty teleportActivation;
