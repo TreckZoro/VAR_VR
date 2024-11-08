@@ -12,13 +12,18 @@ public class MenuChange : MonoBehaviour
 {
     public ContinuousMoveProviderBase ContinuousMoveProviderBase;
     public ContinuousTurnProviderBase ContinuousTurnProviderBase; // Imagino que es este
+    
     public Slider speedSlider; // Para movimiento personaje
     public Slider turnSpeedSlider;  // Slider para la velocidad de giro
+    
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI turnText;
 
     public Button spawnBanderaButton;
     public Button quitGameButton;  // Referencia al botón de salida
+
+    public TMP_Dropdown interactionLayerDropd;
+    
     public GameObject bandera; //De momento es un cilindro
 
     public Transform player;
@@ -68,6 +73,13 @@ public class MenuChange : MonoBehaviour
         {
             Debug.LogError("El botón QuitGame no está asignado.");
         }
+
+        if (interactionLayerDropd != null) {
+            interactionLayerDropd.onValueChanged.AddListener(OnInteractionLayerChanged);
+        }
+        else {
+            Debug.LogError("El DropDown de iteraccion no está asignado.");
+        }
     }
 
     //Velocidad del player
@@ -98,7 +110,8 @@ public class MenuChange : MonoBehaviour
         if (bandera != null && player != null)
         {
             // Posicion del jugador + 1 metro hacia adelante
-            Vector3 spawnPosition = player.position + player.forward;
+
+            Vector3 spawnPosition = player.position + player.forward + player.up;
             Debug.Log(spawnPosition);
 
             // Instanciamos el cubo en la posición calculada
@@ -108,6 +121,27 @@ public class MenuChange : MonoBehaviour
         {
             Debug.LogError("No se puede generar el cubo, asegúrese de que el prefab y el jugador estén asignados.");
         }
+    }
+
+    void OnInteractionLayerChanged(int i) {
+        GameObject[] piedras = GameObject.FindGameObjectsWithTag("moonRock");
+
+        foreach (GameObject piedra in piedras) { 
+            var grabInteractable = piedra.GetComponent<XRGrabInteractable>();
+            if (grabInteractable != null) {
+                // Cambiar la layer del interaction mask segun la opcion
+                if (i == 0)
+                {
+                    grabInteractable.interactionLayers = InteractionLayerMask.GetMask("Direct Grab");
+                }
+                else if (i == 1) {
+
+                    grabInteractable.interactionLayers = InteractionLayerMask.GetMask("Distance Grab");
+                }
+                
+            }
+        }
+        Debug.Log(i == 0 ? "Piedras configuradas para Direct Grab" : "Piedras configuradas para Distance Grab");
     }
 
     // Función para salir del juego
