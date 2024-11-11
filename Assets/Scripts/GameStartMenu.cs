@@ -37,7 +37,8 @@ public class GameStartMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        UnityEngine.Application.Quit();
+
     }
 
     public void StartGame()

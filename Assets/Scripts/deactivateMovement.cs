@@ -72,10 +72,7 @@ public class DisableMovementAndRotationOnAnyGrab : MonoBehaviour
     // Disable movement and rotation
     private void DisableMovementAndRotation()
     {
-        if (continuousMoveProvider != null)
-        {
-            continuousMoveProvider.enabled = false; // Disable movement
-        }
+        
 
         if (continuousTurnProvider != null)
         {

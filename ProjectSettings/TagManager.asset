@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - moonRock
+  - Bandera
+  - Tunnel
+  - TunnelTP
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NonTeleport
   - Water
   - UI
   - Ground

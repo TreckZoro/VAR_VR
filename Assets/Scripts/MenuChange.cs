@@ -19,6 +19,8 @@ public class MenuChange : MonoBehaviour
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI turnText;
 
+    public Toggle tunnelToggle;
+
     public Button spawnBanderaButton;
     public Button quitGameButton;  // Referencia al botón de salida
 
@@ -26,10 +28,23 @@ public class MenuChange : MonoBehaviour
     
     public GameObject bandera; //De momento es un cilindro
 
+    public GameObject[] tunnelObjects;  // Para los objetos con tag "Tunnel"
+    public GameObject[] tunnelTPObjects;  // Para los objetos con tag "TunnelTP
+
     public Transform player;
 
     private void Start()
     {
+        // Buscar los objetos al inicio de la escena
+        tunnelObjects = GameObject.FindGameObjectsWithTag("Tunnel");
+        tunnelTPObjects = GameObject.FindGameObjectsWithTag("TunnelTP");
+
+        // Comprobamos que se encontraron los objetos
+        if (tunnelObjects.Length == 0 || tunnelTPObjects.Length == 0)
+        {
+            Debug.LogError("No se encontraron objetos con los tags 'Tunnel' o 'TunnelTP'.");
+        }
+
         if (ContinuousMoveProviderBase == null) {
             Debug.LogError("No hay ContinuousMoveProvider");
             return;
@@ -58,6 +73,15 @@ public class MenuChange : MonoBehaviour
         else
         {
             Debug.LogError("El botón BanderaSpawn no está asignado.");
+        }
+
+        if (tunnelToggle != null)
+        {
+            tunnelToggle.onValueChanged.AddListener(OnTunnellingChecked);
+        }
+        else
+        {
+            Debug.LogError("El botón de tunel no está asignado.");
         }
 
         // Configuración del botón QuitGame
@@ -107,19 +131,29 @@ public class MenuChange : MonoBehaviour
 
     void SpawnCube()
     {
+        // Buscar una bandera existente en la escena
+        GameObject banderaExistente = GameObject.FindWithTag("Bandera");
+
+        if (banderaExistente != null)
+        {
+            // Si ya existe una bandera, la destruimos
+            Destroy(banderaExistente);
+        }
+
+        // Asegurarnos de que la bandera y el jugador estén asignados
         if (bandera != null && player != null)
         {
-            // Posicion del jugador + 1 metro hacia adelante
-
+            // Posición del jugador + 1 metro hacia adelante
             Vector3 spawnPosition = player.position + player.forward + player.up;
-            Debug.Log(spawnPosition);
+            //Debug.Log("Posición de la nueva bandera: " + spawnPosition);
 
-            // Instanciamos el cubo en la posición calculada
-            Instantiate(bandera, spawnPosition, Quaternion.identity);
+            // Instanciamos la nueva bandera en la posición calculada
+            GameObject nuevaBandera = Instantiate(bandera, spawnPosition, Quaternion.identity);
+            nuevaBandera.tag = "Bandera"; // Asignamos la etiqueta "Bandera" para identificarla
         }
         else
         {
-            Debug.LogError("No se puede generar el cubo, asegúrese de que el prefab y el jugador estén asignados.");
+            Debug.LogError("No se puede generar la bandera, asegúrese de que el prefab y el jugador estén asignados.");
         }
     }
 
@@ -144,16 +178,40 @@ public class MenuChange : MonoBehaviour
         Debug.Log(i == 0 ? "Piedras configuradas para Direct Grab" : "Piedras configuradas para Distance Grab");
     }
 
+    void OnTunnellingChecked(bool activated)
+    {
+        Debug.Log("Toggle is now " + activated);
+
+        // Si no se encontraron los objetos, no realizamos nada
+        if (tunnelObjects.Length == 0 || tunnelTPObjects.Length == 0)
+        {
+            Debug.LogError("Faltan los objetos para manejar el tunneling.");
+            return;
+        }
+
+        // Activamos o desactivamos los objetos de manera directa
+        foreach (var obj in tunnelObjects)
+        {
+            obj.SetActive(activated);
+        }
+
+        foreach (var obj in tunnelTPObjects)
+        {
+            obj.SetActive(activated);
+        }
+
+        // Mensaje adicional para depurar
+        Debug.Log(activated ? "Tunneling activado" : "Tunneling desactivado");
+
+
+    }
+
+
     // Función para salir del juego
     void QuitGame()
     {
-        #if UNITY_EDITOR
-            // Si estamos en el editor, detenemos la simulación
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            // Si estamos en una build del juego, cerramos la aplicación
-            Application.Quit();
-        #endif
+        UnityEngine.Application.Quit();
+
     }
 
     void GoToMainMenu()
